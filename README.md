@@ -1,84 +1,105 @@
-# Stress-test
+# ⚔️ Stress-test (CLI em Go)
 
-## Descrição
+## 📄 Descrição
 
-O **Stress-test** é uma ferramenta de linha de comando (CLI) desenvolvida em Go para realizar testes de carga (stress test) em serviços web HTTP. Ela foi criada para desenvolvedores, equipes de QA e operadores que desejam avaliar a robustez, desempenho e estabilidade de APIs e aplicações web sob diferentes níveis de carga.
+O **Stress-test** é uma ferramenta de linha de comando (CLI) desenvolvida em **Go** para realizar testes de carga (_stress test_) em serviços web HTTP.
 
-A ferramenta permite que o usuário defina a URL do serviço a ser testado, o número total de requisições e o nível de concorrência (quantidade de chamadas simultâneas). Ao final do teste, a ferramenta gera um relatório detalhado com estatísticas sobre o desempenho do serviço, facilitando a identificação de gargalos e falhas.
+💻 Ideal para desenvolvedores, equipes de QA e operadores que desejam avaliar:
+
+- Robustez 🛡️  
+- Desempenho ⚙️  
+- Estabilidade 🌐  
+
+da API ou aplicação sob diferentes níveis de carga.
+
+A ferramenta permite definir:
+
+- A **URL** do serviço a ser testado  
+- O número total de **requisições**  
+- O nível de **concorrência** (requisições simultâneas)
+
+✅ Ao final do teste, gera um **relatório detalhado** com estatísticas que facilitam a identificação de gargalos e falhas.
 
 ---
 
-## Regras de Negócio
+## 🧠 Regras de Negócio
 
 - O usuário deve informar obrigatoriamente:
-  - `--url`: URL do serviço a ser testado (ex: `http://localhost:8080/health`).
-  - `--requests`: Número total de requisições a serem realizadas (ex: `1000`).
-  - `--concurrency`: Número de requisições simultâneas (concorrência, ex: `10`).
-- O sistema distribui as requisições de acordo com o nível de concorrência informado, utilizando goroutines para maximizar a performance.
-- Todas as requisições são feitas via método HTTP GET.
-- O sistema garante que o número total de requisições será cumprido, mesmo em caso de falhas ou erros de rede.
-- Ao final, é gerado um relatório contendo:
-  - Tempo total gasto na execução do teste.
-  - Quantidade total de requisições realizadas.
-  - Quantidade de requisições com status HTTP 200 (sucesso).
-  - Distribuição dos demais códigos de status HTTP (ex: 404, 500, etc.).
-  - Quantidade de erros (requisições que não obtiveram resposta ou retornaram erro de rede).
+  - `--url`: URL do serviço (ex: `http://localhost:8080/health`)
+  - `--requests`: Total de requisições (ex: `1000`)
+  - `--concurrency`: Nível de concorrência (ex: `10`)
+  
+- As requisições são distribuídas com **goroutines** para máxima performance.
+- Todos os testes são realizados com o método `GET`.
+- O sistema **garante** que todas as requisições serão feitas, mesmo em caso de erros.
+- O relatório final contém:
+  - ⏱️ Tempo total da execução  
+  - 📥 Total de requisições realizadas  
+  - ✅ Quantidade de `HTTP 200`  
+  - 📊 Distribuição de códigos de status HTTP  
+  - ❌ Quantidade de erros ou falhas de rede  
 
 ---
 
-## Como usar
+## 🚀 Como usar
 
-### Pré-requisitos
+### ⚙️ Pré-requisitos
 
-- [Go 1.22.4+](https://go.dev/dl/) instalado **(para rodar sem Docker)**
-- [Docker](https://www.docker.com/) instalado **(para rodar com Docker)**
+- [Go 1.22.4+](https://go.dev/dl/) instalado *(para rodar localmente)*
+- [Docker](https://www.docker.com/) instalado *(para rodar com container)*
 
 ---
 
-### Rodando **sem Docker**
+### 🧪 Rodando **sem Docker**
 
 1. Clone o repositório:
-   ```sh
-   git clone https://github.com/Eliezer2000/Stress-test.git
-   cd Stress-test
-   ```
+
+```bash
+git clone https://github.com/Eliezer2000/Stress-test.git
+cd Stress-test
+```
 
 2. Compile o projeto:
-   ```sh
-   go build -o stress-test ./cmd
-   ```
 
-3. Execute a ferramenta, passando os parâmetros desejados:
-   ```sh
-   ./stress-test --url=http://google.com --requests=100 --concurrency=10
-   ```
+```bash
+go build -o stress-test ./cmd
+```
 
-   - **--url**: URL do serviço a ser testado.
-   - **--requests**: Número total de requisições a serem feitas.
-   - **--concurrency**: Número de requisições simultâneas.
+3. Execute a ferramenta com os parâmetros desejados:
+
+```bash
+./stress-test --url=http://google.com --requests=100 --concurrency=10
+```
+
+Parâmetros disponíveis:
+
+- `--url`: URL do serviço a ser testado  
+- `--requests`: Número total de requisições  
+- `--concurrency`: Número de requisições simultâneas  
 
 ---
 
-### Rodando **com Docker**
+### 🐳 Rodando **com Docker**
 
 1. Construa a imagem Docker:
-   ```sh
-   docker build -t stress-test .
-   ```
 
-2. Execute o container, passando os parâmetros desejados:
-   ```sh
-   docker run --rm stress-test --url=http://google.com --requests=100 --concurrency=10
-   ```
+```bash
+docker build -t stress-test .
+```
 
-   - O parâmetro `--rm` remove o container após a execução.
-   - Para acessar um serviço rodando na sua máquina local, use `host.docker.internal` no lugar de `localhost` (válido para Windows e Mac).
+2. Execute o container:
+
+```bash
+docker run --rm stress-test --url=http://google.com --requests=100 --concurrency=10
+```
+
+ℹ️ Para acessar um serviço na sua máquina local usando Docker, utilize `host.docker.internal` no lugar de `localhost` (válido para **Windows** e **Mac**).
 
 ---
 
-## Exemplo de saída
+## 📊 Exemplo de saída
 
-```
+```text
 ====== Stress Test Report ======
 Total time: 2.3456789s
 Total requests: 100
@@ -92,7 +113,7 @@ Status code distribution:
 
 ---
 
-## Estrutura do Projeto
+## 🗂️ Estrutura do Projeto
 
 ```
 Stress-test/
@@ -110,16 +131,22 @@ Stress-test/
 
 ---
 
-## Detalhes Técnicos
+## ⚙️ Detalhes Técnicos
 
-- **Concorrência:** Utiliza goroutines e canais para controlar o número de requisições simultâneas, garantindo performance e respeito ao limite de concorrência definido pelo usuário.
-- **Coleta de resultados:** Cada requisição retorna um struct com o status HTTP e possíveis erros, permitindo análise detalhada dos resultados.
-- **Relatório:** O relatório final apresenta estatísticas essenciais para análise de performance e estabilidade do serviço testado.
-- **Extensibilidade:** O projeto está organizado em múltiplos arquivos e módulos, facilitando futuras melhorias, como suporte a outros métodos HTTP, autenticação, payloads customizados, etc.
-
+- 🔁 **Concorrência**: uso de goroutines e canais para controlar requisições simultâneas com alta performance
+- 🧩 **Coleta de resultados**: cada requisição retorna status HTTP e erro (se houver), permitindo análise completa
+- 📈 **Relatório final**: exibe estatísticas úteis para avaliar performance
+- 🛠️ **Extensibilidade**: arquitetura modular, fácil de estender para:
+  - Suporte a outros métodos HTTP
+  - Autenticação
+  - Payloads personalizados
+  - Exportação dos resultados
 
 ---
 
-## Licença
+## 📄 Licença
 
-Este projeto está licenciado sob a licença MIT. Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+Este projeto está licenciado sob a licença **MIT**.  
+Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+
+---
