@@ -144,9 +144,8 @@ Stress-test/
 
 ---
 
-## 📄 Licença
+## 👤 Autor
 
-Este projeto está licenciado sob a licença **MIT**.  
-Consulte o arquivo [LICENSE](LICENSE) para mais detalhes.
+[Eliézer Alves Bernardino](https://www.linkedin.com/in/eliezeralvesbernardino/)
 
 ---
